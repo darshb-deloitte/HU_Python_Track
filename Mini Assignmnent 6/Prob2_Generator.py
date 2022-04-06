@@ -5,6 +5,7 @@ def fib(limit):
         a, b = b, a + b
 
 
-x = fib(90)
+n = int(input("Enter the Limit:"))
+x = fib(n)
 for i in x:
-    print(i, end = ',')
+    print(i, end=',')
