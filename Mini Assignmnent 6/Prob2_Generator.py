@@ -7,4 +7,4 @@ def fib(limit):
 
 x = fib(90)
 for i in x:
-    print(i)
+    print(i, end = ',')
