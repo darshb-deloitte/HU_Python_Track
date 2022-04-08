@@ -8,7 +8,7 @@ while exit_val == False:
 
     login_status = False
     print("""
-    ******Welcome to BookMyShow ******
+    ******** Welcome to BookMyShow *********
     1. Login
     2. Register new account
     3. Exit""")
@@ -16,7 +16,7 @@ while exit_val == False:
     num = int(input("Enter : "))
 
     if num == 1:
-        print("******Welcome to BookMyShow *******")
+        print("****** Welcome to BookMyShow *******")
         user = input("User: ")
         password = input("Password: ")
         admin_user = BasePage.login_func(user, password)
@@ -26,7 +26,7 @@ while exit_val == False:
         print("**** Create new Account ***** ")
         name, user_details = BasePage.register_func()
         BasePage.user_detail[name] = user_details
-        BasePage.user_detail.to_csv("user.csv",index=False)
+        BasePage.user_detail.to_csv("user.csv", index=False)
         continue
 
     elif num == 3:
@@ -44,7 +44,7 @@ while exit_val == False:
     while login_status:
         if admin_user == "admin":
             print("1. Admin  Login:")
-            print("****** Welcome Admin*******")
+            print("****** Welcome Admin *******")
             print("1. Add new Movie Info \n"
                   "2. Edit Movie Info \n"
                   "3. Delete Movies \n"
@@ -66,11 +66,11 @@ while exit_val == False:
                 BasePage.movie_file.to_csv("movies.csv", index=False)
 
             elif opt == 3:
-                print("******Welcome Admin*******")
+                print("****** Welcome Admin *******")
                 if len(BasePage.movie_file.columns) > 0:
                     title = input("Title of the movie to be deleted: ")
                     del BasePage.movie_file[title]
-                    if len(BasePage.movie_file.columns) > 0 :
+                    if len(BasePage.movie_file.columns) > 0:
                         BasePage.movie_file.to_csv("movies.csv", index=False)
 
                 else:
@@ -79,6 +79,9 @@ while exit_val == False:
 
             elif opt == 4:
                 login_status = False
+
+            else:
+                print("Enter a valid option \n")
 
         if admin_user == "user":
             print("2. User Login")
@@ -101,3 +104,19 @@ while exit_val == False:
                 print("2 . Logout \n")
 
             movie = int(input("Enter movie: "))
+            print(movies[movie - 1])
+            func = BasePage.user_display(movies[movie - 1])
+
+            title = movies[movie - 1]
+
+            if func == 1:
+                BasePage.book_ticket(title)
+                login_status = False
+
+            elif func == 2:
+                pass
+
+            elif func == 3:
+                print("****** Welcome User1*******")
+                BasePage.movie_rating(title)
+                login_status = False
